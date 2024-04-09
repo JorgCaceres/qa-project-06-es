@@ -5,3 +5,4 @@
 - Una vez instalado Pytest, en la consola ejecuta el comando: pytest -s -o log_cli=true -log_cli_level=DEBUG
 - Comprueba las pruebas que fallaron. 
 - Jorge Caceres - Corte 8 - Sprint 6
+- Comentario extra: Los espacios estan de esa forma para seguir las convenciones sugeridas por Pycharm

@@ -36,7 +36,10 @@ def positive_assert(kit_name):
 # Función de prueba negativa cuando el error es "No se enviaron todos los parámetros requeridos"
 def negative_assert(kit_name):
     # El cuerpo de la solicitud actualizada se guarda en la variable kit_body
-    kit_body = get_kit_body(kit_name)
+    if kit_name != {}:
+        kit_body = get_kit_body(kit_name)
+    else:
+        kit_body = kit_name
     # El resultado de la solicitud para crear un nuevo usuario o usuaria se guarda en la variable response
     kit_response = sender_stand_request.post_new_client_kit(kit_body, get_new_user_token())
 
@@ -49,37 +52,37 @@ def negative_assert(kit_name):
 
 # Prueba 1. Kit creado con éxito. El parámetro name contiene 1 caracter
 def test_create_kit_1_letter_in_name_get_success_response():
-    positive_assert(data.positive_test_1)
+    positive_assert(data.test_one_character)
 
 
 # Prueba 2. Kit creado con éxito. El parámetro name contiene 511 caracteres.
 def test_create_kit_511_letter_in_name_get_success_response():
-    positive_assert(data.positive_test_2)
+    positive_assert(data.test_five_hundred_eleven_character)
 
 
-# Prueba 3. Error. El parámetro name contiene 1 carácter
+# Prueba 3. Error. El parámetro name contiene 0 carácter
 def test_create_kit_0_letter_in_name_get_error_response():
-    negative_assert(data.negative_test_3)
+    negative_assert(data.test_zero_character)
 
 
 # Prueba 4. Error. El parámetro name contiene 512 carácter
 def test_create_kit_512_letter_in_name_get_error_response():
-    negative_assert(data.negative_test_4)
+    negative_assert(data.test_five_hundred_twelve_character)
 
 
 # Prueba 5. Kit creado con éxito. El parámetro name contiene caracteres especiales
 def test_create_kit_special_caracter_in_name_get_success_response():
-    positive_assert(data.positive_test_5)
+    positive_assert(data.test_special_character)
 
 
 # Prueba 6. Kit creado con éxito. El parámetro name contiene espacios
 def test_create_kit_space_caracter_in_name_get_success_response():
-    positive_assert(data.positive_test_6)
+    positive_assert(data.test_space_character)
 
 
 # Prueba 7. Kit creado con éxito. El parámetro name contiene numeros como string
 def test_create_kit_number_caracter_in_name_get_success_response():
-    positive_assert(data.positive_test_7)
+    positive_assert(data.test_number_character)
 
 
 # Prueba 8. Error. Falta el parámetro name en la solicitud
@@ -87,11 +90,11 @@ def test_create_kit_no_parameter_get_error_response():
     # El diccionario con el cuerpo de la solicitud se copia del archivo "data" a la variable "user_body"
     kit_body = data.kit_body.copy()
     # El parámetro "name" se elimina de la solicitud
-    kit_body.pop(data.negative_test_8)
+    kit_body.pop(data.test_empty_parameter)
     # Comprueba la respuesta
     negative_assert(kit_body)
 
 
 # Prueba 9. Error. El tipo del parámetro name es Integer
 def test_create_kit_number_type_name_get_error_response():
-    negative_assert(data.negative_test_4)
+    negative_assert(data.test_wrong_type_parameter)
